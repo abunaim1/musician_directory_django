@@ -18,7 +18,7 @@ def edit(request, id):
     album_ob = Album.objects.get(pk=id)
     data = AlbumForm(instance=album_ob)
     if request.method == 'POST':
-        data = AlbumForm(request.POST)
+        data = AlbumForm(request.POST, instance=album_ob)  # ei khaner instance ta use korlam jate repead na hoye jai, user eidt koruk othoba na koruk edit e click korar por new arektta data add hoye jabe jodi ei same instance ta ekhane add na kortam. 
         if data.is_valid():
             data.save()
             return redirect('home')
