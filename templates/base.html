@@ -14,7 +14,7 @@
   <body>
     <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">Navbar</a>
+        <a class="navbar-brand">Navbar</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -31,12 +31,24 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'musician' %}">Add Musician</a>
+              <a class="nav-link" href="{% url 'musician' %}">Create Musician</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'album' %}">Add Album</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
         </div>
       </div>
     </nav>

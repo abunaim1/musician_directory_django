@@ -1,6 +1,7 @@
 {% extends 'base.html' %} 
 {% block content %}
 <table class="table table-striped">
+  {% csrf_token %}
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -10,7 +11,9 @@
       <th scope="col">Instrument Type</th>
       <th scope="col">Album Name</th>
       <th scope="col">Release Date</th>
+      {% if user.is_authenticated %}
       <th scope="col">Actions</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -23,10 +26,12 @@
         <td>{{row.musician.instrument_type}}</td>
         <td>{{row.album_name}}</td>
         <td>{{row.release_date}}</td>
+        {% if user.is_authenticated %}
         <td>
           <a href="{% url 'edit' row.id%}"><button class="btn btn-warning btn-sm">Eidt</button></a>
           <a href="{% url 'delete' row.id%}"> <button class="btn btn-danger btn-sm">Delete</button></a>
         </td>
+        {% endif %}
       </tr>
     {% endfor %}
   </tbody>
